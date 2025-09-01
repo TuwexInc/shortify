@@ -107,31 +107,29 @@
 <script define:vars={{ shortCode }}>
   const getOriginalUrl = async (code) => {
     try {
-      const response = await fetch(`/api/${code}`, {
-        redirect: 'manual'
-      });
+      const response = await fetch(`/api/${code}`);
 
       if (response.status === 404) {
         window.location.href = '/404';
         return;
       }
 
-      if (response.status === 302 || response.status === 301) {
-        const location = response.headers.get('Location');
-        if (location) return location;
-      }
-
       if (!response.ok) throw new Error('Error al obtener la URL');
 
       const data = await response.json();
-      return data.url;
+      if(!data.redirectUrl){
+        return '/404';
+      }
+
+      return data.redirectUrl;
+
     } catch (err) {
       return '/404';
     }
   };
 
   document.addEventListener('DOMContentLoaded', async () => {
-    const originalUrl = await getOriginalUrl(shortCode);
+  const originalUrl = await getOriginalUrl(shortCode);
     if (originalUrl) {
       setTimeout(() => {
         window.location.href = originalUrl;

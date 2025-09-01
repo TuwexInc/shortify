@@ -13,7 +13,7 @@ const { code } = Astro.params;
 
   async function getOriginalUrl(code) {
     try {
-      const res = await fetch(`/api/${code}`);
+      const res = await fetch(`/api/s/${code}`);
       if (!res.ok) throw new Error('No se encontró la URL original');
       const data = await res.json();
       return data.originalUrl

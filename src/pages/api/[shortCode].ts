@@ -1,42 +1,55 @@
 import type { APIRoute } from 'astro';
 
 export const GET: APIRoute = async ({ params }) => {
-
   const { shortCode } = params;
   const apiBaseUrl = import.meta.env.PUBLIC_API_URL;
 
   if (!shortCode) {
-      return new Response(('Not found'), { 
-          status: 400 
-      });
+    return new Response("Not found", { status: 400 });
   }
 
   try {
-    const res = await fetch(`${apiBaseUrl}/api/home/${shortCode}`);
+    const res = await fetch(`${apiBaseUrl}/api/home/${shortCode}`, {
+      redirect: "manual",
+    });
+
+    console.log("res", res);  
 
     if (res.status === 404) {
-      return new Response('Not found', { status: 404 });
+      return new Response("Not found", { status: 404 });
     }
 
     if (res.status === 302 || res.status === 301) {
-      const location = res.headers.get('location');
-
-      console.log("location", location);
-
-      if (location) {
-        return new Response(null, {
-          status: res.status,
-          headers: {
-            Location: location,
-          },
-        });
+      const firstLocation = res.headers.get("location");
+      
+      if (!firstLocation) {
+        return new Response("Not found", { status: 404 });
       }
+
+      const secondRes = await fetch(firstLocation, { redirect: "manual" });
+
+
+      if (secondRes.status === 302 || secondRes.status === 301) {
+        const finalLocation = secondRes.headers.get("location");
+
+        
+        if (finalLocation) {
+          return new Response(
+            JSON.stringify({ redirectUrl: finalLocation }),
+            {
+              status: 200,
+              headers: { "Content-Type": "application/json" },
+            }
+          );
+        }
+      }
+
+      return new Response("Not found", { status: 404 });
     }
 
-    return new Response('Not found', { status: 404 });
-  } 
-  catch (err) {
-  return new Response('Not found', { status: 404 });
+    return new Response("Not found", { status: 404 });
+  } catch (err) {
+    return new Response("Not found", { status: 404 });
   }
-
 };
+
