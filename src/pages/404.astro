@@ -1,0 +1,46 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="URL Not Found - Shortify">
+  <div class="container">
+    <div class="card error-page">
+      <div class="error-icon">🔍</div>
+      <h1>URL Not Found</h1>
+      <p>The shortened URL you're looking for doesn't exist or has expired.</p>
+      <a href="/" class="btn">
+        🏠 Back to Home
+      </a>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .error-page {
+    text-align: center;
+    padding: 3rem 2rem;
+  }
+
+  .error-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+  }
+
+  .error-page h1 {
+    font-size: 2rem;
+    font-weight: 600;
+    margin: 0 0 1rem 0;
+    color: #1f2937;
+  }
+
+  .error-page p {
+    font-size: 1.1rem;
+    color: #6b7280;
+    margin-bottom: 2rem;
+  }
+
+  .error-page .btn {
+    display: inline-block;
+    text-decoration: none;
+  }
+</style>

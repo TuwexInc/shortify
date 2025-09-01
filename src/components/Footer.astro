@@ -1,0 +1,28 @@
+---
+// Footer component
+---
+
+<footer class="footer">
+    <div class="container">
+      <p>&copy; {new Date().getFullYear()} All rights reserved | Developed by Tuwex Inc</p>
+    </div>
+  </footer>
+  
+  <style>
+    .footer {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(20px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        bottom: 0;
+        z-index: 100;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .footer p {
+      margin: 0;
+      color: white;
+      font-size: 0.9rem;
+    }
+  </style>

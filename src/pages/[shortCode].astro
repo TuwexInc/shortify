@@ -1,0 +1,141 @@
+---
+  const { shortCode } = Astro.params;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Redirecting...</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="redirect-container">
+    <div class="redirect-card">
+      <div class="spinner-large"></div>
+      <h1>🔗 Redirecting...</h1>
+      <p>You will be redirected in a few seconds</p>
+      <p class="code">Code: <span>{shortCode}</span></p>
+    </div>
+  </div>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .redirect-container {
+      text-align: center;
+    }
+
+    .redirect-card {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      padding: 3rem 2rem;
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      animation: bounceIn 0.6s ease-out;
+    }
+
+    .spinner-large {
+      width: 50px;
+      height: 50px;
+      border: 4px solid #e5e7eb;
+      border-top: 4px solid #3B82F6;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 2rem auto;
+    }
+
+    h1 {
+      color: #1f2937;
+      margin: 0 0 1rem 0;
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+
+    p {
+      color: #6b7280;
+      margin: 0.5rem 0;
+    }
+
+    .code {
+      font-family: 'Monaco', 'Consolas', monospace;
+      background: #f3f4f6;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      margin-top: 1rem;
+    }
+
+    .code span {
+      color: #3B82F6;
+      font-weight: 600;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes bounceIn {
+      0% {
+        opacity: 0;
+        transform: scale(0.3);
+      }
+      50% {
+        opacity: 1;
+        transform: scale(1.05);
+      }
+      70% {
+        transform: scale(0.9);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+  </style>
+</body>
+</html>
+
+<script define:vars={{ shortCode }}>
+  const getOriginalUrl = async (code) => {
+    try {
+      const response = await fetch(`/api/${code}`, {
+        redirect: 'manual'
+      });
+
+      if (response.status === 404) {
+        window.location.href = '/404';
+        return;
+      }
+
+      if (response.status === 302 || response.status === 301) {
+        const location = response.headers.get('Location');
+        if (location) return location;
+      }
+
+      if (!response.ok) throw new Error('Error al obtener la URL');
+
+      const data = await response.json();
+      return data.url;
+    } catch (err) {
+      return '/404';
+    }
+  };
+
+  document.addEventListener('DOMContentLoaded', async () => {
+    const originalUrl = await getOriginalUrl(shortCode);
+    if (originalUrl) {
+      setTimeout(() => {
+        window.location.href = originalUrl;
+      }, 2000);
+    }
+  });
+</script>

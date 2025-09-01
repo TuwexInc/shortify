@@ -1,0 +1,152 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="About - Shortify">
+  <div class="container">
+    <div class="card">
+      <div class="about-content">
+        <h1>🔗 About Shortify</h1>
+        
+        <div class="feature-grid">
+          <div class="feature-card">
+            <div class="feature-icon">⚡</div>
+            <h3>Super Fast</h3>
+            <p>Shorten URLs in seconds with our optimized interface</p>
+          </div>
+          
+          <div class="feature-card">
+            <div class="feature-icon">📊</div>
+            <h3>Analytics</h3>
+            <p>Track clicks and performance of your URLs</p>
+          </div>
+          
+          <div class="feature-card">
+            <div class="feature-icon">🔒</div>
+            <h3>Secure</h3>
+            <p>All URLs are validated before being processed</p>
+          </div>
+          
+          <div class="feature-card">
+            <div class="feature-icon">📱</div>
+            <h3>Responsive</h3>
+            <p>Works perfectly on all devices</p>
+          </div>
+        </div>
+
+        <div class="cta-section">
+          <a href="/" class="btn">
+            ← Back to Shortener
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .about-content {
+    text-align: center;
+  }
+
+  .about-content h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    background: linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+  }
+
+  .feature-card {
+    background: rgba(255, 255, 255, 0.5);
+    padding: 2rem 1.5rem;
+    border-radius: 16px;
+    transition: all 0.3s ease;
+  }
+
+  .feature-card:hover {
+    transform: translateY(-8px);
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  }
+
+  .feature-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .feature-card h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0 0 0.5rem 0;
+    color: #1f2937;
+  }
+
+  .feature-card p {
+    color: #6b7280;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .tech-stack {
+    margin: 3rem 0;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 16px;
+  }
+
+  .tech-stack h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: #1f2937;
+  }
+
+  .tech-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+  }
+
+  .tech-badge {
+    background: linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+
+  .cta-section {
+    margin-top: 2rem;
+  }
+
+  .cta-section .btn {
+    text-decoration: none;
+  }
+
+  @media (max-width: 768px) {
+    .about-content h1 {
+      font-size: 2rem;
+    }
+
+    .feature-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .tech-list {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+</style>

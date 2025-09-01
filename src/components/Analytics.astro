@@ -1,0 +1,114 @@
+---
+// Componente simple para mostrar estadísticas
+---
+
+<div class="analytics-container">
+  <h3>📈 Site Statistics</h3>
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-number" id="total-urls">0</div>
+      <div class="stat-label">URLs Created</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number" id="total-clicks">0</div>
+      <div class="stat-label">Total Clicks</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number" id="most-clicked">-</div>
+      <div class="stat-label">Most Popular</div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .analytics-container {
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .analytics-container h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: #1f2937;
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+  }
+
+  .stat-card {
+    background: rgba(255, 255, 255, 0.5);
+    padding: 1.5rem 1rem;
+    border-radius: 12px;
+    text-align: center;
+    transition: all 0.3s ease;
+  }
+
+  .stat-card:hover {
+    transform: translateY(-4px);
+    background: rgba(255, 255, 255, 0.7);
+  }
+
+  .stat-number {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #3B82F6;
+    margin-bottom: 0.5rem;
+  }
+
+  .stat-label {
+    font-size: 0.9rem;
+    color: #6b7280;
+    font-weight: 500;
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    updateAnalytics();
+  });
+
+  interface UrlHistoryItem {
+    shortCode: string;
+    // Add other properties that might be in your URL history items
+  }
+
+  function updateAnalytics() {
+    const history: UrlHistoryItem[] = JSON.parse(localStorage.getItem('urlHistory') || '[]');
+    
+    // Total URLs
+    const totalUrlsElement = document.getElementById('total-urls');
+    if (totalUrlsElement) {
+      totalUrlsElement.textContent = history.length.toString();
+    }
+    
+    // Total clicks
+    let totalClicks = 0;
+    let mostClicked = { code: '', clicks: 0 };
+    
+    history.forEach((item: UrlHistoryItem) => {
+      const clicks = parseInt(localStorage.getItem(`clicks_${item.shortCode}`) || '0', 10);
+      totalClicks += clicks;
+      
+      if (clicks > mostClicked.clicks) {
+        mostClicked = { code: item.shortCode, clicks };
+      }
+    });
+    
+    const totalClicksElement = document.getElementById('total-clicks');
+    const mostClickedElement = document.getElementById('most-clicked');
+    
+    if (totalClicksElement) {
+      totalClicksElement.textContent = totalClicks.toString();
+    }
+    
+    if (mostClickedElement) {
+      mostClickedElement.textContent = 
+        mostClicked.clicks > 0 ? `${mostClicked.code} (${mostClicked.clicks})` : '-';
+    }
+  }
+
+  setInterval(updateAnalytics, 5000);
+</script>
