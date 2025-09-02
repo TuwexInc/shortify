@@ -5,7 +5,7 @@ import cloudflare from '@astrojs/cloudflare';
 
 // https://astro.build/config
 export default defineConfig({
-    site: import.meta.env.QA 
+    site: import.meta.env.NODE_ENV === 'qa' 
         ? 'shortify-gamma-two.vercel.app' 
         : 'https://shortify.tuwexinc.com',
     env: {
@@ -15,7 +15,7 @@ export default defineConfig({
             TURSO_AUTH_TOKEN: envField.string({ context: "server", access: "secret" }),
         }
     },
-	adapter: import.meta.env.QA 
+	adapter: import.meta.env.NODE_ENV === 'qa' 
     ? vercel() 
     : cloudflare({
         platformProxy: {
