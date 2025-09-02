@@ -11,6 +11,6 @@ directory = "./dist"
 enabled = true
 
 [vars]
-PUBLIC_API_URL="
+PUBLIC_API_URL=
 TURSO_DATABASE_URL=
 TURSO_AUTH_TOKEN=

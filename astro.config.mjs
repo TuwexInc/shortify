@@ -3,11 +3,13 @@ import { defineConfig, envField } from 'astro/config';
 import vercel from '@astrojs/vercel';
 import cloudflare from '@astrojs/cloudflare';
 
+const isQA = process.env.NODE_ENV === 'qa';
+
 // https://astro.build/config
 export default defineConfig({
-    site: import.meta.env.NODE_ENV === 'qa' 
-        ? 'shortify-gamma-two.vercel.app' 
-        : 'https://shortify.tuwexinc.com',
+    site: isQA
+        ? 'https://shortify-gamma-two.vercel.app' 
+        : 'https://e9056610.shortify-4lb.pages.dev',
     env: {
         schema: {
             PUBLIC_API_URL: envField.string({ context: "client", access: "public", optional: true }),
@@ -15,7 +17,7 @@ export default defineConfig({
             TURSO_AUTH_TOKEN: envField.string({ context: "server", access: "secret" }),
         }
     },
-	adapter: import.meta.env.NODE_ENV === 'qa' 
+	adapter: isQA 
     ? vercel() 
     : cloudflare({
         platformProxy: {
