@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://shortify.afleitasp.workers.dev/sitemap-index.xml
