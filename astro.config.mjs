@@ -38,7 +38,15 @@ export default defineConfig({
       ? vercel() 
       : cloudflare({
           platformProxy: {
-              enabled: true
+              enabled: true,
+          },
+          routes: {
+            extend: {
+              exclude: [
+                { pattern: "/api/*" },
+                { pattern: "/s/*" }
+              ]
+            }
           },
           imageService: 'passthrough',
       }),
