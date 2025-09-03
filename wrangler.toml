@@ -1,17 +1,11 @@
-name = "shortify"
-compatibility_date = "2025-09-03"
+name               = "shortify"
+main               = "./dist/_worker.js/index.js"
+compatibility_date = "2025-03-25"
+compatibility_flags = [ "nodejs_compat", "global_fetch_strictly_public" ]
 
-type = "javascript"
-
-[site]
-bucket = "./dist"         
-entry-point = "./workers"
-
-[[routers]]
-name = "api"
-rules = [
-  { pattern = "/api/*", type = "include" }
-]
+[assets]
+binding   = "ASSETS"
+directory = "./dist"
 
 [observability]
 enabled = true
