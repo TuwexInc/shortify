@@ -39,8 +39,7 @@ export default defineConfig({
   : cloudflare({
       platformProxy: {
           enabled: true
-      },
-      imageService: 'passthrough',
+      }
   }),
   image: {
     service: passthroughImageService()
