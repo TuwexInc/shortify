@@ -1,33 +1,16 @@
 name = "shortify"
-main = "./dist/_worker.js/index.js"
-compatibility_date = "2025-03-25"
-compatibility_flags = [ "nodejs_compat", "global_fetch_strictly_public" ]
+compatibility_date = "2025-09-03"
+
+type = "javascript"
 
 [site]
-bucket = "./dist"
-
-[[routers]]
-name = "static"
-rules = [
-  { pattern = "/_astro/*", type = "include" },
-  { pattern = "/assets/*", type = "include" },
-  { pattern = "/*.js", type = "include" },
-  { pattern = "/*.css", type = "include" },
-  { pattern = "/*.svg", type = "include" },
-  { pattern = "/*.png", type = "include" },
-  { pattern = "/*.jpg", type = "include" },
-  { pattern = "/*.jpeg", type = "include" },
-  { pattern = "/*.gif", type = "include" },
-  { pattern = "/*.ico", type = "include" },
-  { pattern = "/*.txt", type = "include" },
-  { pattern = "/sitemap*.xml", type = "include" }
-]
+bucket = "./dist"         
+entry-point = "./workers"
 
 [[routers]]
 name = "api"
 rules = [
-  { pattern = "/api/*", type = "include" },
-  { pattern = "/s/*", type = "include" }
+  { pattern = "/api/*", type = "include" }
 ]
 
 [observability]
