@@ -19,9 +19,6 @@ export default defineConfig({
             TURSO_AUTH_TOKEN: envField.string({ context: "server", access: "secret" }),
         }
     },
-    build: {
-        assets: "_astro",
-    },
     vite: {
         plugins: [
         viteStaticCopy({
