@@ -39,5 +39,5 @@ jobs:
           secrets: |
             PUBLIC_API_URL
         env:
-          PUBLIC_API_URL: ${{ secrets.PUBLIC_CLERK_PUBLISHABLE_KEY }}
+          PUBLIC_API_URL: ${{ secrets.PUBLIC_API_URL }}
 
