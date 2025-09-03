@@ -20,32 +20,33 @@ export default defineConfig({
       }
   },
   build: {
-      assets: "_astro",
+    assets: "_astro",
   },
   vite: {
       plugins: [
-      viteStaticCopy({
-          targets: [
-            {
-              src: 'src/assets/*',
-              dest: 'assets/',
-            },
-          ]
-        })
+          viteStaticCopy({
+              targets: [
+                  {
+                      src: 'src/assets/*',
+                      dest: 'assets/',
+                  },
+              ]
+          })
       ]
-    },
-	adapter: isQA 
-  ? vercel() 
-  : cloudflare({
-      platformProxy: {
-          enabled: true
-      }
-  }),
+  },
+  adapter: isQA 
+      ? vercel() 
+      : cloudflare({
+          platformProxy: {
+              enabled: true
+          },
+          imageService: 'passthrough',
+      }),
+  output: 'server',
   image: {
-    service: passthroughImageService()
+      service: passthroughImageService()
   },
   integrations: [
       sitemap(),
-  ],
-  output: 'server'
+  ]
 });
