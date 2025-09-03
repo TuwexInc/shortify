@@ -9,8 +9,3 @@ directory = "./dist"
 
 [observability]
 enabled = true
-
-[vars]
-PUBLIC_API_URL=
-TURSO_DATABASE_URL=
-TURSO_AUTH_TOKEN=
