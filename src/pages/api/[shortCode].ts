@@ -1,8 +1,5 @@
 import type { APIRoute } from 'astro';
 
-
-const apiBaseUrl = import.meta.env.PUBLIC_API_URL;
-
 function isBaseUrlMatching(location: string, apiBaseUrl: string): boolean {
   if (!location) return false;
 
