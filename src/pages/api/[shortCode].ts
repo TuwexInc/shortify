@@ -32,8 +32,6 @@ export const GET: APIRoute = async ({ params }) => {
       redirect: "manual",
     });
 
-    console.log("res", res);  
-
     if (res.status === 404) {
       return new Response("Not found", { status: 404 });
     }
@@ -46,6 +44,7 @@ export const GET: APIRoute = async ({ params }) => {
       }
 
       if (!isBaseUrlMatching(firstLocation, apiBaseUrl)) {
+
         return new Response(
           JSON.stringify({ redirectUrl: firstLocation }),
           {

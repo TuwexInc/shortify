@@ -3,7 +3,6 @@ import { turso } from "@/turso";
 
 export const GET: APIRoute = async ({ params }) => {
     try {
-    
       const shortCode = params.code;
         
       if (!shortCode) {
