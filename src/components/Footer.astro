@@ -4,10 +4,10 @@
 
 <footer class="footer">
     <div class="container">
-      <p>&copy; {new Date().getFullYear()} All rights reserved | Developed by Tuwex Inc</p>
+      <p>&copy; {new Date().getFullYear()} All rights reserved | Developed by <a href="https://tuwexinc.com" target="_blank">Tuwex Inc</a></p>
     </div>
   </footer>
-  
+
   <style>
     .footer {
         background: rgba(255, 255, 255, 0.1);
@@ -19,10 +19,21 @@
         justify-content: center;
         align-items: center;
     }
-    
+
     .footer p {
       margin: 0;
       color: white;
       font-size: 0.9rem;
+    }
+
+    .footer a {
+      color: white;
+      text-decoration: underline;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .footer a:hover {
+      color: rgba(255, 255, 255, 0.8);
     }
   </style>
